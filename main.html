@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACP Activity 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center; 
+        }
+        .activity-container {
+            display: inline-block;
+            text-align: left;
+            margin-top: 20px;
+            padding: 40px;
+            border: 2px solid black;
+            position: relative;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            width: 280px;
+            margin: 10px auto;
+        }
+        button {
+            padding: 8px 12px;
+            border: 2px solid black;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .canvas-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        canvas {
+            border: 1px solid black;
+            background: white;
+        }
+        .color-container {
+            display: flex;
+            justify-content: space-between;
+            width: 280px;
+            margin: 15px auto;
+        }
+        .color-box {
+            width: 80px;
+            height: 50px;
+            border: 2px solid black;
+        }
+        #blueCircle {
+            width: 60px;
+            height: 60px;
+            background-color: blue;
+            border-radius: 50%;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="activity-container">
+        <h2>ACP Activity 1</h2>
+        <p>Select what you want to draw</p>
+
+        <div class="btn-container">
+            <button onclick="drawShape('circle')">Draw a circle</button>
+            <button onclick="drawShape('rectangle')">Draw a Rectangle</button>
+        </div>
+
+        <div class="canvas-container">
+            <canvas id="myCanvas" width="280" height="150"></canvas>
+        </div>
+
+        <p>Select the color to fill your drawing</p>
+
+        <div class="btn-container">
+            <button onclick="setColor('red')">Red</button>
+            <button onclick="setColor('blue')">Blue</button>
+            <button onclick="setColor('black')">Black</button>
+        </div>
+
+        <div class="color-container">
+            <div id="blackBox" class="color-box" style="background-color: black;"></div>
+            <div id="blueCircle"></div>
+        </div>
+    </div>
+
+    <script>
+        let canvas = document.getElementById("myCanvas");
+        let ctx = canvas.getContext("2d");
+        let currentColor = null;
+        let currentShape = null;
+
+        function drawShape(shape) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = "green";
+            ctx.lineWidth = 2;
+            currentShape = shape;
+
+            if (shape === "circle") {
+                ctx.beginPath();
+                ctx.arc(120, 75, 40, 0, Math.PI * 2);
+                ctx.stroke();
+            } else if (shape === "rectangle") {
+                ctx.strokeRect(90, 50, 120, 60);
+            }
+        }
+
+        function setColor(color) {
+            if (currentShape) {
+                currentColor = color;
+                ctx.fillStyle = currentColor;
+
+                if (currentShape === "circle") {
+                    ctx.beginPath();
+                    ctx.arc(120, 75, 40, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                } else if (currentShape === "rectangle") {
+                    ctx.fillRect(90, 50, 120, 60);
+                    ctx.strokeRect(90, 50, 120, 60);
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
